@@ -52,7 +52,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-          path: .
+          path: ./artifact
+
+      - name: List downloaded files for debugging
+        run: |
+          echo "Contents of artifact directory:"
+          ls -la ./artifact
+          echo "Contents of backend directory (if exists):"
+          ls -la ./artifact/backend || echo "Backend directory not found"
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -67,4 +74,4 @@ jobs:
         with:
           app-name: "bachesplit"
           slot-name: "Production"
-          package: "backend"
+          package: "./artifact/backend"
