@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "backend/**"
   workflow_dispatch:
 
 jobs:
@@ -23,7 +25,9 @@ jobs:
       # Optional: Add step to run tests here
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend
+        run: |
+          cd backend
+          zip -r ../release.zip ./*
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -60,4 +64,3 @@ jobs:
         with:
           app-name: "bachesplit"
           slot-name: "Production"
-          package: "./backend"
