@@ -24,16 +24,16 @@ jobs:
 
       # Optional: Add step to run tests here
 
-      - name: Zip artifact for deployment
+      - name: Copy backend files for deployment
         run: |
-          cd backend
-          zip -r ../release.zip ./*
+          mkdir deployment
+          cp -r backend/* deployment/
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: release.zip
+          path: deployment
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,9 +47,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
 
       - name: Login to Azure
         uses: azure/login@v2
