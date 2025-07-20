@@ -32,12 +32,18 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
+      - name: Run collectstatic
+        run: |
+          cd backend
+          source venv/bin/activate
+          python manage.py collectstatic --noinput
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
-            backend
+            backend/
             !backend/venv/
 
   deploy:
@@ -52,14 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-          path: ./artifact
-
-      - name: List downloaded files for debugging
-        run: |
-          echo "Contents of artifact directory:"
-          ls -la ./artifact
-          echo "Contents of backend directory (if exists):"
-          ls -la ./artifact || echo "Backend directory not found"
+          path: .
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -74,4 +73,3 @@ jobs:
         with:
           app-name: "bachesplit"
           slot-name: "Production"
-          package: "./artifact"
