@@ -60,3 +60,4 @@ jobs:
         with:
           app-name: "bachesplit"
           slot-name: "Production"
+          package: "./backend"
