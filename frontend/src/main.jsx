@@ -10,8 +10,7 @@ console.log("Environment variables:", {
 });
 
 const googleClientId =
-  import.meta.env.VITE_GOOGLE_CLIENT_ID ||
-  "71855289127-ulan1daguhtqb2s4j70r4hda7pro2crs.apps.googleusercontent.com";
+  import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 console.log("Using Google Client ID:", googleClientId);
 
