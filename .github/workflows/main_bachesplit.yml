@@ -27,7 +27,7 @@ jobs:
       - name: Copy backend files for deployment
         run: |
           mkdir deployment
-          cp -r backend/* deployment/
+          cp -r backend/. deployment/
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
