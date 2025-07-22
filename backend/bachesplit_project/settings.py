@@ -91,7 +91,7 @@ if DEBUG:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "sqlserver",
+            "ENGINE": "mssql",
             "NAME": env("DB_NAME"),
             "USER": env("DB_USER"),
             "PASSWORD": env("DB_PASSWORD"),
