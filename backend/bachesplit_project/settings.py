@@ -91,7 +91,7 @@ if DEBUG:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "mssql",
+            "ENGINE": "sql_server.pyodbc",
             "NAME": env("DB_NAME"),
             "USER": env("DB_USER"),
             "PASSWORD": env("DB_PASSWORD"),
