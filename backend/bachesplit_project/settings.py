@@ -91,12 +91,15 @@ if DEBUG:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
+            "ENGINE": "mssql",
             "NAME": env("DB_NAME"),
             "USER": env("DB_USER"),
             "PASSWORD": env("DB_PASSWORD"),
             "HOST": env("DB_HOST"),
-            "PORT": env("DB_PORT", default="5432"),
+            "PORT": env("DB_PORT", default="1433"),
+            "OPTIONS": {
+                "driver": "ODBC Driver 17 for SQL Server",
+            },
         }
     }
 
