@@ -8,11 +8,19 @@ from google.auth.transport import requests
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from .serializers import UserProfileSerializer
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+
 
 User = get_user_model()
 
+class LoginRateThrottle(AnonRateThrottle):
+    scope = 'login'
+
+class APIRateThrottle(UserRateThrottle):
+    scope = 'api'
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
+    throttle_classes = [APIRateThrottle]
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -22,6 +30,7 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
+@throttle_classes([LoginRateThrottle])
 def google_login(request):
     token = request.data.get("token")
     try:
