@@ -24,7 +24,6 @@ psycopg2-binary==2.9.10
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
 PyJWT==2.9.0
-pyodbc==5.2.0
 pyparsing==3.2.3
 pytz==2025.2
 PyYAML==6.0.2
@@ -38,4 +37,3 @@ typing_extensions==4.14.0
 uritemplate==4.2.0
 urllib3==2.5.0
 gunicorn
-mssql-django
